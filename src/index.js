@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Extra Importations ...
+import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap package importation
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
