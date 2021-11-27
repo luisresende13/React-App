@@ -7,7 +7,7 @@ import { DISHES } from './shared/dishes';
 
 import { Navbar, NavbarBrand } from 'reactstrap';
 
-
+import DishDetail from './components/DishDetailComponent'
 
 class App extends Component {
 
