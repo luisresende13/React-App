@@ -7,7 +7,7 @@ import DishDetail from './DishDetailComponent';
 
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
-
+import About from './AboutComponent';
 import { DISHES } from '../shared/dishes';
 
 import { Navbar, NavbarBrand } from 'reactstrap';
@@ -64,11 +64,18 @@ class Main extends Component {
       );
     };
 
+    const AboutPage = () => {
+      return (
+        <About leaders={this.state.leaders} />
+      );
+    }
+
     return (
         <div>
             <Header />
             <Switch>
                 <Route path='/home' component={HomePage} />
+                <Route path='/aboutus' component={AboutPage} />
                 <Route exact path='/menu' component={MenuPage} />
                 <Route path='/menu/:dishId' component={DishWithId} />
                 <Route exact path='/contactus' component={Contact} />} />
