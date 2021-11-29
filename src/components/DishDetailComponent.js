@@ -16,6 +16,7 @@ class CommentForm extends Component {
 	constructor(props) {
 		super(props);
         this.toggleModal = this.toggleModal.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
 		this.state={
 			isModelOpen: false
 		};
@@ -25,6 +26,15 @@ class CommentForm extends Component {
       this.setState({
         isModalOpen: !this.state.isModalOpen
       });
+    }
+
+    handleSubmit(values) {
+        console.log('Current State is: ' + JSON.stringify(values));
+        alert('Current State is: ' + JSON.stringify(values));
+        
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        // event.preventDefault();
+
     }
 
 	render() {
@@ -37,7 +47,7 @@ class CommentForm extends Component {
                 <ModalHeader toggle={this.toggleModal}><strong>Submit Comment</strong></ModalHeader>
                 <ModalBody>
                     
-						<LocalForm>
+						<LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                             
                             <Row className="form-group">
                                 <Label htmlFor="rating" md={12}><strong>Rating</strong></Label>
@@ -126,7 +136,7 @@ function RenderDish({dish}) {
 
 }
 
-function RenderComments({comments}) {
+function RenderComments({comments, addComment, dishId}) {
 
 	if (comments!=null) {
 		
@@ -142,10 +152,12 @@ function RenderComments({comments}) {
 		} )
 
 		return (
+		<div>
 			<ul className='list-unstyled'>
 				{comment_lst}
-				<CommentForm />
 			</ul>
+			<CommentForm  dishId={dishId} addComment={addComment} />
+		</div>
 		);		
 	}
 
@@ -181,7 +193,11 @@ const DishDetail = (props) => {
                     <RenderDish dish={props.dish} />
                 </div>
                 <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.comments} />
+					<RenderComments comments={props.comments}
+   					 addComment={props.addComment}
+					 dishId={props.dish.id}
+					/>
+
                 </div>
             </div>
             </div>
@@ -215,7 +231,7 @@ class DishDetail extends Component {
 		)
 	}
 
-	renderComments(comments) {
+	renderComments({comments}) {
 
 		if (comments!=null) {
 			
