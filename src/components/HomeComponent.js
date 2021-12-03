@@ -6,6 +6,8 @@ import { Loading } from './LoadingComponent';
 
 import { baseUrl } from '../shared/baseUrl';
 
+import { FadeTransform } from 'react-animation-components';
+
 function RenderCard({item, isLoading, errMess}) {
     
     if (isLoading) {
@@ -20,20 +22,35 @@ function RenderCard({item, isLoading, errMess}) {
     }
     else 
         return(
-            <Card>
-                <CardImg src={baseUrl + item.image} alt={item.name} />
-                <CardBody>
-                <CardTitle>{item.name}</CardTitle>
-                {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
-                <CardText>{item.description}</CardText>
-                </CardBody>
-            </Card>
+            <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                <Card>
+                    <CardImg src={baseUrl + item.image} alt={item.name} />
+                    <CardBody>
+                    <CardTitle>{item.name}</CardTitle>
+                    {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
+                    <CardText>{item.description}</CardText>
+                    </CardBody>
+                </Card>
+            </FadeTransform>
         );
 
 }
 
 function Home(props) {
-    return(
+
+	if (props.dish==null | props.promotion==null | props.leader==null) {
+		
+		console.log(new Array(props.dish, props.promotion, props.leader))
+		return (
+			<div><p>One of the card objects returned as 'null'. Check Console for the returned values.</p></div>
+		)
+	}
+
+    else return(
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
