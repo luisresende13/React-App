@@ -14,6 +14,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        <style rel='stylesheet' href='./App.css'/>
         <BrowserRouter>
           <div className="App">
             <Main />

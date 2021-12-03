@@ -42,15 +42,7 @@ function RenderCard({item, isLoading, errMess}) {
 
 function Home(props) {
 
-	if (props.dish==null | props.promotion==null | props.leader==null) {
-		
-		console.log(new Array(props.dish, props.promotion, props.leader))
-		return (
-			<div><p>One of the card objects returned as 'null'. Check Console for the returned values.</p></div>
-		)
-	}
-
-    else return(
+	return(
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
@@ -60,7 +52,7 @@ function Home(props) {
                     <RenderCard item={props.promotion} isLoading={props.promoLoading} errMess={props.promoErrMess} />
                 </div>
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.leader} />
+                    <RenderCard item={props.leader} isLoading={props.leaderLoading} errMess={props.leaderErrMess} />
                 </div>
             </div>
         </div>
